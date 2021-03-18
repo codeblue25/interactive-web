@@ -1,0 +1,20 @@
+body{
+    color: #1f2d3d;
+    background: #ffc82c;
+}
+.world{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1000px; /*원근감 만들기*/
+}
+.stage{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d; /*3D효과 전달*/
+}
