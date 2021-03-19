@@ -18,3 +18,34 @@ body{
     height: 100vh;
     transform-style: preserve-3d; /*3D효과 전달*/
 }
+.house{
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d;
+    transform: translateZ(-490vw);
+}
+.wall{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+}
+.wall-left{
+    width: 1000vw;
+    transform: rotateY(90deg) translateZ(-500vw); /*회전축인 500vw만큼 Z축으로 이동*/
+}
+.wall-right{
+    width: 1000vw;
+    transform: rotateY(90deg) translateZ(-400vw); /*100vw를 사이에 두고 오른쪽에 위치*/
+}
+.wall-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.wall-title{
+    font-size: 5rem;
+}
