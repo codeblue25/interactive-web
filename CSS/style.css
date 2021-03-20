@@ -1,4 +1,5 @@
 body{
+    height: 500vw;
     color: #1f2d3d;
     background: #ffc82c;
 }
@@ -35,10 +36,12 @@ body{
 .wall-left{
     width: 1000vw;
     transform: rotateY(90deg) translateZ(-500vw); /*회전축인 500vw만큼 Z축으로 이동*/
+    background: #f8f8f8;
 }
 .wall-right{
     width: 1000vw;
     transform: rotateY(90deg) translateZ(-400vw); /*100vw를 사이에 두고 오른쪽에 위치*/
+    background: #f8f8f8;
 }
 .wall-content{
     display: flex;
@@ -48,4 +51,16 @@ body{
 }
 .wall-title{
     font-size: 5rem;
+}
+.wall-front-a{
+    transform: translateZ(300vw);
+}
+.wall-front-b{
+    transform: translateZ(50vw);
+}
+.wall-front-c{
+    transform: translateZ(-200vw);
+}
+.wall-front-d{
+    transform: translateZ(-500vw);
 }
