@@ -30,5 +30,12 @@
     window.addEventListener("resize", resizeHandler); /*브라우저 크기가 변할 때마다 maxScroll을 경신시킴*/
     resizeHandler();
 
-    new Character();
+    stage.addEventListener("click", function(e){
+        // console.log(e.clientX / window.innerWidth * 100);
+        new Character({
+            xPos : e.clientX / window.innerWidth * 100, 
+            yPos : e.clientY / window.innerHeight * 100
+            /*Character생성자의 매개변수로 여러가지 속성을 추가해야하기 때문에, 직접적인 매개변수 대신 객체로 넣는다.*/
+        });
+    }); /*클릭할 때마다 캐릭터 생성*/
 })(); /*전역변수를 회피하기 위해 즉시 실행 함수 사용*/
