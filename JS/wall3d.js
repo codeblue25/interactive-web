@@ -30,4 +30,5 @@
     window.addEventListener("resize", resizeHandler); /*브라우저 크기가 변할 때마다 maxScroll을 경신시킴*/
     resizeHandler();
 
+    new Character();
 })(); /*전역변수를 회피하기 위해 즉시 실행 함수 사용*/
