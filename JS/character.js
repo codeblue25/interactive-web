@@ -30,5 +30,15 @@ function Character(info){
     document.querySelector(".stage").appendChild(this.mainElem);
     this.mainElem.style.left = info.xPos + "%";
     this.mainElem.style.top = info.yPos + "%";
+    this.init();
+}
 
+Character.prototype = {
+    constructor: Character, /*생성자 Character를 새로운 객체로 재설정*/
+    init: function(){
+        const self = this; /*생성자(Character)로 만든 인스턴스(character)를 가르키기 위해서 self 상수에 넣음*/
+        window.addEventListener("scroll", function(){
+            self.mainElem.classList.add("running");
+        });
+    }
 }
