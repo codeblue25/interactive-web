@@ -30,6 +30,7 @@ function Character(info){
     document.querySelector(".stage").appendChild(this.mainElem);
     this.mainElem.style.left = info.xPos + "%";
     this.scrollState = false; /*스크롤 진행여부를 나타내는 속성, 기본값 false*/
+    this.lastScrollTop = 0; /*바로 직전의 스크롤 위치를 나타내는 속성*/
     this.init();
 }
 
@@ -58,6 +59,15 @@ Character.prototype = {
             /*3. 0.5초가 경과되기 전에 스크롤이벤트가 갱신되면 clearTimeout이 실행되서 setTimeout은 실행못함*/
             /*5. 스크롤이 멈추면 스크롤이벤트가 갱신되지 않음 -> clearTimeout이 실행되지 않음으로 setTimeout이 실행됨*/
             /*5-1. 0.5초 뒤 scrollState = false -> running 클래스가 삭제되면서 팔다리 움직임이 멈춤*/            
+
+            // console.log("직전의 마지막 위치: " + self.lastScrollTop);
+            // console.log("현재 위치: " + pageYOffset);
+            if(self.lastScrollTop < pageYOffset){
+                self.mainElem.setAttribute('data-direction', 'forward'); /*스크롤 내릴 때*/
+            }else{
+                self.mainElem.setAttribute('data-direction', 'backward'); /*스크롤 올릴 때*/
+            }
+            self.lastScrollTop = pageYOffset;
         });
     }
 }
