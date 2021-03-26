@@ -29,7 +29,7 @@ function Character(info){
 
     document.querySelector(".stage").appendChild(this.mainElem);
     this.mainElem.style.left = info.xPos + "%";
-    this.mainElem.style.top = info.yPos + "%";
+    this.scrollState = false; /*스크롤 진행여부를 나타내는 속성, 기본값 false*/
     this.init();
 }
 
@@ -37,8 +37,27 @@ Character.prototype = {
     constructor: Character, /*생성자 Character를 새로운 객체로 재설정*/
     init: function(){
         const self = this; /*생성자(Character)로 만든 인스턴스(character)를 가르키기 위해서 self 상수에 넣음*/
+
         window.addEventListener("scroll", function(){
-            self.mainElem.classList.add("running");
+            clearTimeout(self.scrollState); 
+            /*1. 첫번째 턴에서는 setTimeout이 실행되지 않아서 리턴되는 값 없음*/
+            /*1-1. 첫번째 턴 이후엔 스크롤 할 때마다 리턴되는 값을 지움*/
+        
+            if(!self.scrollState){
+                self.mainElem.classList.add("running");
+                /*2. 첫번째 턴에서는 리턴되는 값이 없으니까 scrollState = false -> if(!false){} -> if(ture){}*/
+                /*2-1. if문이 실행되면서 running 클래스 추가 -> 팔다리 움직임*/
+                /*4. 리턴된 값이 생겨서  scrollState = true -> if(!true){} ->if(false){} if문 실행안함*/
+                /*4-1. 3과 4를 반복하다가 스크롤을 멈추면 5로 넘어감*/
+            }
+
+            self.scrollState = setTimeout(function(){
+                self.scrollState = false;
+                self.mainElem.classList.remove("running");
+            }, 500); 
+            /*3. 0.5초가 경과되기 전에 스크롤이벤트가 갱신되면 clearTimeout이 실행되서 setTimeout은 실행못함*/
+            /*5. 스크롤이 멈추면 스크롤이벤트가 갱신되지 않음 -> clearTimeout이 실행되지 않음으로 setTimeout이 실행됨*/
+            /*5-1. 0.5초 뒤 scrollState = false -> running 클래스가 삭제되면서 팔다리 움직임이 멈춤*/            
         });
     }
 }
