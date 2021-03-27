@@ -28,7 +28,7 @@ function Character(info){
     + '</div>';
 
     document.querySelector(".stage").appendChild(this.mainElem);
-    this.mainElem.style.left = info.xPos + "%";
+    this.mainElem.style.left = info.xPos + "%"; /*캐릭터 위치를 나타내는 속성*/
     this.scrollState = false; /*스크롤 진행여부를 나타내는 속성, 기본값 false*/
     this.lastScrollTop = 0; /*바로 직전의 스크롤 위치를 나타내는 속성*/
     this.init();
@@ -69,5 +69,18 @@ Character.prototype = {
             }
             self.lastScrollTop = pageYOffset;
         });
+
+        window.addEventListener("keydown", function(e){
+            if(e.keyCode == 37){
+                self.mainElem.setAttribute('data-direction', 'left'); /*왼쪽 방향키*/
+                self.mainElem.classList.add('running');
+            }else if(e.keyCode == 39){
+                self.mainElem.setAttribute('data-direction', 'right'); /*오른쪽 방향키*/
+                self.mainElem.classList.add('running');
+            }
+        });
+        window.addEventListener("keyup", function(){
+            self.mainElem.classList.remove("running");
+        })
     }
 }
