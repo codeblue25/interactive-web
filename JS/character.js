@@ -34,6 +34,8 @@ function Character(info){
     this.xPos = info.xPos; /*xPos를 this객체의 속성으로도 설정 -> 값에 접근하기 용이해짐*/
     this.speed = 0.3; /*캐릭터 움직임 속도를 나타내는 속성*/
     this.direction; /*캐릭터가 움직이는 방향(좌우)을 나타내는 속성*/
+    this.runningState = false; /*좌우 이동중인지 여부를 나타내는 속성*/
+    this.rafId; /*requestAnimationFrame이 return하는 값을 저장하는 속성*/
     this.init();
 }
 
@@ -74,21 +76,27 @@ Character.prototype = {
         });
 
         window.addEventListener("keydown", function(e){
+            if(self.runningState) return; /*runningState가 ture면 return -> keydown반복실행X*/
+
+
             if(e.keyCode == 37){
                 self.direction = "left";
                 self.mainElem.setAttribute('data-direction', 'left'); /*왼쪽 방향키*/
                 self.mainElem.classList.add('running');
                 self.run();
-                
+                self.runningState = true;
             }else if(e.keyCode == 39){
                 self.direction = "right";
                 self.mainElem.setAttribute('data-direction', 'right'); /*오른쪽 방향키*/
                 self.mainElem.classList.add('running');
                 self.run();
+                self.runningState = true;
             }
         });
         window.addEventListener("keyup", function(){
             self.mainElem.classList.remove("running");
+            cancelAnimationFrame(self.rafId);
+            self.runningState = false; /*다시 keydown할 때를 생각해서 초기화*/
         });
     },
     run: function(){ /*캐릭터가 부드럽게 이동하도록 하는 메소드*/
@@ -99,6 +107,6 @@ Character.prototype = {
             self.xPos += self.speed;
         }
         self.mainElem.style.left = self.xPos + "%";
-        requestAnimationFrame(self.run.bind(self)); /*bind()메소드를 통해 self를 this로 지정*/
+        self.rafId = requestAnimationFrame(self.run.bind(self)); /*bind()메소드를 통해 self를 this로 지정*/
     }
 };
