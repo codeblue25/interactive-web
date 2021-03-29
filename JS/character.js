@@ -78,7 +78,6 @@ Character.prototype = {
         window.addEventListener("keydown", function(e){
             if(self.runningState) return; /*runningState가 ture면 return -> keydown반복실행X*/
 
-
             if(e.keyCode == 37){
                 self.direction = "left";
                 self.mainElem.setAttribute('data-direction', 'left'); /*왼쪽 방향키*/
@@ -106,6 +105,13 @@ Character.prototype = {
         }else if(self.direction == "right"){
             self.xPos += self.speed;
         }
+
+        if(self.xPos < 2){
+            self.xPos = 2;
+        }else if(self.xPos > 88){
+            self.xPos = 88;
+        }
+
         self.mainElem.style.left = self.xPos + "%";
         self.rafId = requestAnimationFrame(self.run.bind(self)); /*bind()메소드를 통해 self를 this로 지정*/
     }
