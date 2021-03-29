@@ -31,6 +31,9 @@ function Character(info){
     this.mainElem.style.left = info.xPos + "%"; /*캐릭터 위치를 나타내는 속성*/
     this.scrollState = false; /*스크롤 진행여부를 나타내는 속성, 기본값 false*/
     this.lastScrollTop = 0; /*바로 직전의 스크롤 위치를 나타내는 속성*/
+    this.xPos = info.xPos; /*xPos를 this객체의 속성으로도 설정 -> 값에 접근하기 용이해짐*/
+    this.speed = 0.3; /*캐릭터 움직임 속도를 나타내는 속성*/
+    this.direction; /*캐릭터가 움직이는 방향(좌우)을 나타내는 속성*/
     this.init();
 }
 
@@ -72,15 +75,30 @@ Character.prototype = {
 
         window.addEventListener("keydown", function(e){
             if(e.keyCode == 37){
+                self.direction = "left";
                 self.mainElem.setAttribute('data-direction', 'left'); /*왼쪽 방향키*/
                 self.mainElem.classList.add('running');
+                self.run();
+                
             }else if(e.keyCode == 39){
+                self.direction = "right";
                 self.mainElem.setAttribute('data-direction', 'right'); /*오른쪽 방향키*/
                 self.mainElem.classList.add('running');
+                self.run();
             }
         });
         window.addEventListener("keyup", function(){
             self.mainElem.classList.remove("running");
-        })
+        });
+    },
+    run: function(){ /*캐릭터가 부드럽게 이동하도록 하는 메소드*/
+        const self = this;
+        if(self.direction == "left"){
+            self.xPos -= self.speed;
+        }else if(self.direction == "right"){
+            self.xPos += self.speed;
+        }
+        self.mainElem.style.left = self.xPos + "%";
+        requestAnimationFrame(self.run.bind(self)); /*bind()메소드를 통해 self를 this로 지정*/
     }
-}
+};
