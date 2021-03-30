@@ -34,7 +34,7 @@
         // console.log(e.clientX / window.innerWidth * 100);
         new Character({
             xPos : e.clientX / window.innerWidth * 100, 
-            yPos : e.clientY / window.innerHeight * 100
+            speed: Math.random() * 0.5 + 0.2 /*0부터 1사이의 수가 랜덤하게 출력*/
             /*Character생성자의 매개변수로 여러가지 속성을 추가해야하기 때문에, 직접적인 매개변수 대신 객체로 넣는다.*/
         });
     }); /*클릭할 때마다 캐릭터 생성*/

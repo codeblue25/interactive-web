@@ -32,7 +32,7 @@ function Character(info){
     this.scrollState = false; /*스크롤 진행여부를 나타내는 속성, 기본값 false*/
     this.lastScrollTop = 0; /*바로 직전의 스크롤 위치를 나타내는 속성*/
     this.xPos = info.xPos; /*xPos를 this객체의 속성으로도 설정 -> 값에 접근하기 용이해짐*/
-    this.speed = 0.3; /*캐릭터 움직임 속도를 나타내는 속성*/
+    this.speed = info.speed; /*캐릭터 움직임 속도를 나타내는 속성*/
     this.direction; /*캐릭터가 움직이는 방향(좌우)을 나타내는 속성*/
     this.runningState = false; /*좌우 이동중인지 여부를 나타내는 속성*/
     this.rafId; /*requestAnimationFrame이 return하는 값을 저장하는 속성*/
