@@ -2,6 +2,7 @@
     const house = document.querySelector(".house");
     let maxScroll; /*body 전체 높이 - 현재 브라우저 창 높이 = 스크롤바 높이*/
     const bar = document.querySelector(".progress-bar");
+    const selectElem = document.querySelector(".select-character");
     const mousePos = {x: 0, y: 0};
     const stage = document.querySelector(".stage");
 
@@ -38,4 +39,10 @@
             /*Character생성자의 매개변수로 여러가지 속성을 추가해야하기 때문에, 직접적인 매개변수 대신 객체로 넣는다.*/
         });
     }); /*클릭할 때마다 캐릭터 생성*/
+
+    selectElem.addEventListener("click", function(e){
+        const value = e.target.getAttribute("data-char");
+        document.body.setAttribute("data-char", value); /*data-char의 값에 따라 속성 추가*/
+    });
+
 })(); /*전역변수를 회피하기 위해 즉시 실행 함수 사용*/
